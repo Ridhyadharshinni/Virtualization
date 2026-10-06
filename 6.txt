@@ -1,0 +1,207 @@
+# METHOD 2 – SHARED FOLDER
+.
+
+### 1. Create Shared Folder
+
+On the Windows host, create:
+
+`C:\VMShared`
+
+Place a test file inside:
+
+`22IT043.txt`
+
+### 2. Configure Shared Folder in BOTH VMs
+
+For **VM1 and VM2**:
+
+**VirtualBox → VM → Settings → Shared Folders → +**
+
+Set:
+
+* **Folder Path:** `C:\VMShared`
+* **Folder Name:** `VMShared`
+* ☑ **Auto-mount**
+
+Click **OK → OK**.
+
+### 3. Check Shared Folder
+
+Inside each VM:
+
+```bash
+ls /media
+```
+
+Expected:
+
+```text
+sf_VMShared
+```
+
+Then:
+
+```bash
+ls /media/sf_VMShared
+```
+
+Expected:
+
+```text
+22IT043.txt
+```
+
+### 4. If Permission Denied
+
+Run:
+
+```bash
+sudo usermod -aG vboxsf $USER
+sudo reboot
+```
+
+After reboot:
+
+```bash
+ls /media/sf_VMShared
+```
+
+### 5. Transfer File from VM1 → VM2
+
+**In VM1:**
+
+```bash
+echo "Hello from VM1" > VM1.txt
+cp VM1.txt /media/sf_VMShared/
+```
+
+Check:
+
+```bash
+ls /media/sf_VMShared
+```
+
+Expected:
+
+```text
+22IT043.txt
+VM1.txt
+```
+
+**Switch to VM2:**
+
+```bash
+ls /media/sf_VMShared
+```
+
+Then display the transferred file:
+
+```bash
+cat /media/sf_VMShared/VM1.txt
+```
+
+**Expected Output:**
+
+```text
+Hello from VM1
+```
+
+### 6. Transfer File from VM2 → VM1
+
+**In VM2:**
+
+```bash
+echo "Hello from VM2" > VM2.txt
+cp VM2.txt /media/sf_VMShared/
+```
+
+**In VM1:**
+
+```bash
+ls /media/sf_VMShared
+cat /media/sf_VMShared/VM2.txt
+```
+
+**Expected Output:**
+
+```text
+Hello from VM2
+```
+
+ IMPORTANT COMMANDS TO REMEMBER
+
+```bash
+ls /media/sf_VMShared
+```
+
+```bash
+sudo usermod -aG vboxsf $USER
+sudo reboot
+```
+
+```bash
+cp filename /media/sf_VMShared/
+```
+
+```bash
+cat /media/sf_VMShared/filename
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+30-SECOND MEMORY VERSION
+
+Memorize just this:
+
+Windows
+   ↓
+C:\VMShared
+   ↓
+VirtualBox Shared Folder
+   ↓
+/media/sf_VMShared
+
+Then:
+
+# VM1
+echo "Hello from VM1" > VM1.txt
+cp VM1.txt /media/sf_VMShared/
+
+# VM2
+ls /media/sf_VMShared
+cat /media/sf_VMShared/VM1.txt
+Output to show invigilator
+22IT043.txt
+VM1.txt
+
+and:
+
+Hello from VM1
+
+ 
+
+ 

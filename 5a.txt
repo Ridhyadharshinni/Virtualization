@@ -1,0 +1,11 @@
+* egrep -c 'lm' /proc/cpuinfo
+* uname -a
+* ls /lib/modules/5.4.0-84-generic/kernel/arch/x86/kvm/kvm*
+* sudo apt-get install qemu-kvm libvirt-bin bridge-utils qemu-system virt-manager
+* sudo nano /etc/libvirt/libvirtd.conf
+* grep ^[^#] /etc/libvirt/libvirtd.conf
+* sudo systemctl restart libvirtd
+* virsh list
+* virsh
+* version
+* node info

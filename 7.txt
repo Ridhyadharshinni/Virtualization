@@ -1,0 +1,10 @@
+* Get-VMSwitch
+* New-Item -ItemType Directory -Path "C:\Hyper-V" -Force
+* New-VM -Name "Snowfina_ubuntu_PS" -MemoryStartUpBytes 2GB -Generation 2 -NewVHDPath "C:\Hyper-V\Snowfina_ubuntu_PS.vhdx" -NewVHDSizeBytes 30GB
+* Connect-VMNetworkAdapter -VMName "Snowfina_ubuntu_PS" -SwithName "Default Switch"
+* Add-VMDvdDrive -VMName "Snowfina_ubuntu_PS" -Path "C:\Users\Admin\Downloads\ubuntu-26.04.1-desktop-amd64.iso"
+* Set-VMFirmware -VMName "Snowfina_ubuntu_PS" -FirstBootDevice (Get-VMDvdDrive -VMName "Snowfina_ubuntu_PS")
+* Start-VM -Name "Snowfina_ubuntu_PS"
+* Get-VM -Name "Snowfina_ubuntu_PS"
+* Stop-VM -Name "Snowfina_ubuntu_PS"
+* Get-VM -Name "Snowfina_ubuntu_PS"
